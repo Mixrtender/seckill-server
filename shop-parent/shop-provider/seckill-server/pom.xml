@@ -75,6 +75,11 @@
             <artifactId>seata-spring-boot-starter</artifactId>
             <version>1.3.0</version>
         </dependency>
+        <dependency>
+            <groupId>cn.wolfcode</groupId>
+            <artifactId>product-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
 </project>
