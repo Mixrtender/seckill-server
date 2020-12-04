@@ -41,11 +41,6 @@
         </dependency>
         <dependency>
             <groupId>cn.wolfcode</groupId>
-            <artifactId>product-api</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.wolfcode</groupId>
             <artifactId>seckill-api</artifactId>
             <version>1.0.0</version>
         </dependency>
