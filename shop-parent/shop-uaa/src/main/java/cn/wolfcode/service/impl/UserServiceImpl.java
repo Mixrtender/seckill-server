@@ -8,7 +8,7 @@ import cn.wolfcode.domain.UserLogin;
 import cn.wolfcode.mapper.UserMapper;
 import cn.wolfcode.mq.MQConstant;
 import cn.wolfcode.redis.CommonRedisKey;
-import cn.wolfcode.redis.RedisKey;
+import cn.wolfcode.redis.UaaRedisKey;
 import cn.wolfcode.service.IUserService;
 import cn.wolfcode.util.MD5Util;
 import cn.wolfcode.web.msg.UAACodeMsg;
@@ -35,8 +35,8 @@ public class UserServiceImpl implements IUserService {
     private RocketMQTemplate rocketMQTemplate;
     private UserLogin getUser(Long phone){
         UserLogin userLogin;
-        String hashKey = RedisKey.USER_HASH.getRealKey("");
-        String zSetKey = RedisKey.USER_ZSET.getRealKey("");
+        String hashKey = UaaRedisKey.USER_HASH.getRealKey("");
+        String zSetKey = UaaRedisKey.USER_ZSET.getRealKey("");
         String userKey = String.valueOf(phone);
         String objStr = (String) redisTemplate.opsForHash().get(hashKey, String.valueOf(phone));
         if(StringUtils.isEmpty(objStr)){

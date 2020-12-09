@@ -35,7 +35,7 @@ public class OrderInfo implements Serializable {
     private Date payDate;//订单支付时间
     private int payType;//支付方式 1-在线支付 2-积分支付
     private Date seckillDate;//秒杀的日期
-    private int seckillTime;// 秒杀场次
+    private Integer seckillTime;// 秒杀场次
     private Long seckillId;//秒杀商品ID
 
 }

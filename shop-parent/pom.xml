@@ -14,6 +14,7 @@
         <module>shop-uaa</module>
         <module>websocket-server</module>
         <module>shop-common</module>
+        <module>canal-client</module>
     </modules>
     <packaging>pom</packaging>
     <!--父工程-->

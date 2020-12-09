@@ -1,6 +1,6 @@
 package cn.wolfcode.job;
 
-import cn.wolfcode.redis.RedisKey;
+import cn.wolfcode.redis.JobRedisKey;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 import lombok.Getter;
@@ -39,8 +39,8 @@ public class UserCacheJob implements SimpleJob {
         calendar.add(Calendar.DATE,-7);
         //获取7天前的日期
         Long max = calendar.getTime().getTime();
-        String userZSetKey = RedisKey.USER_ZSET.getRealKey("");
-        String userHashKey = RedisKey.USER_HASH.getRealKey("");
+        String userZSetKey = JobRedisKey.USER_ZSET.getRealKey("");
+        String userHashKey = JobRedisKey.USER_HASH.getRealKey("");
         Set<String> ids = redisTemplate.opsForZSet().rangeByScore(userZSetKey, 0, max);
         //删除7天前的用户缓存数据
         if(ids.size()>0){

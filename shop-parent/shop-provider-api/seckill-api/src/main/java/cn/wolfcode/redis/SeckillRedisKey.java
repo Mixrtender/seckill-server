@@ -8,16 +8,17 @@ import java.util.concurrent.TimeUnit;
  * Created by wolfcode-lanxw
  */
 @Getter
-public enum RedisKey {
+public enum SeckillRedisKey {
     SECKILL_PRODUCT_LIST("seckillProductList:"),
     SECKILL_ORDER_HASH("seckillOrderHash:"),
-    SECKILL_STOCK_COUNT_HASH("seckillStockCount:"),;
-    RedisKey(String prefix, TimeUnit unit, int expireTime){
+    SECKILL_STOCK_COUNT_HASH("seckillStockCount:"),
+    SECKILL_REAL_COUNT_HASH("seckillRealCount:");
+    SeckillRedisKey(String prefix, TimeUnit unit, int expireTime){
         this.prefix = prefix;
         this.unit = unit;
         this.expireTime = expireTime;
     }
-    RedisKey(String prefix){
+    SeckillRedisKey(String prefix){
         this.prefix = prefix;
     }
     public String getRealKey(String key){

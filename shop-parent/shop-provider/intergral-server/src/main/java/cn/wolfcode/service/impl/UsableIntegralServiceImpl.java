@@ -10,7 +10,6 @@ import cn.wolfcode.mapper.UsableIntegralMapper;
 import cn.wolfcode.service.IUsableIntegralService;
 import cn.wolfcode.web.msg.IntergralCodeMsg;
 import com.alibaba.fastjson.JSON;
-import io.seata.rm.tcc.api.BusinessActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
