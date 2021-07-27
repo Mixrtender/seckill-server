@@ -43,7 +43,9 @@ public class UserServiceImpl implements IUserService {
             //缓存中并没有，从数据库中查询
             userLogin = userMapper.selectUserLoginByPhone(phone);
             //把用户的登录信息存储到Hash结构中.
-            redisTemplate.opsForHash().put(hashKey,userKey,JSON.toJSONString(userLogin));
+            if(userLogin!=null){
+                redisTemplate.opsForHash().put(hashKey,userKey,JSON.toJSONString(userLogin));
+            }
             //使用zSet结构,value存用户手机号码，分数为登录时间，在定时器中找出7天前登录的用户，然后再缓存中删除.
             //我们缓存中的只存储7天的用户登录信息(热点用户)
         }else{
