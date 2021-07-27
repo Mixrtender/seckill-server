@@ -26,7 +26,6 @@ public class OrderInfo implements Serializable {
     private Long deliveryAddrId;//收货地址
     private String productName;//商品名称
     private String productImg;//商品图片
-    private Integer productCount;//商品总数
     private BigDecimal productPrice;//商品原价
     private BigDecimal seckillPrice;//秒杀价格
     private Long intergral;//消耗积分

@@ -5,9 +5,9 @@
     select * from t_order_info where order_no = #{orderNo}
   </select>
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
-    insert into t_order_info (order_no,user_id,product_id,product_img,delivery_addr_id,product_name,product_count,product_price,seckill_price,status,create_date,pay_date,seckill_date,seckill_time,seckill_id,intergral)
+    insert into t_order_info (order_no,user_id,product_id,product_img,delivery_addr_id,product_name,product_price,seckill_price,status,create_date,pay_date,seckill_date,seckill_time,seckill_id,intergral)
             values
-            (#{orderNo},#{userId},#{productId},#{productImg},#{deliveryAddrId},#{productName},#{productCount},#{productPrice},#{seckillPrice},#{status},#{createDate},#{payDate},#{seckillDate},#{seckillTime},#{seckillId},#{intergral})
+            (#{orderNo},#{userId},#{productId},#{productImg},#{deliveryAddrId},#{productName},#{productPrice},#{seckillPrice},#{status},#{createDate},#{payDate},#{seckillDate},#{seckillTime},#{seckillId},#{intergral})
   </insert>
   <update id="updateCancelStatus">
     update t_order_info set status = #{status} where order_no= #{orderNo} and status = 0
