@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class UserInfo implements Serializable {
     private Long  phone;
     private String nickName;
-    private String heead;
+    private String head;
     private String birthDay;
     private String info;
     private String loginIp;
