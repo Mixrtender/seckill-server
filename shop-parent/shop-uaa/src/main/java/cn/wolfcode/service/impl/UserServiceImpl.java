@@ -54,31 +54,25 @@ public class UserServiceImpl implements IUserService {
         return userLogin;
     }
     @Override
-    public UserResponse login(Long phone, String password, String ip, String token) {
+    public UserResponse login(Long phone, String password, String ip) {
         //无论登录成功还是登录失败,都需要进行日志记录
         LoginLog loginLog = new LoginLog(phone,ip,new Date());
-        //如果token还在有效期之内就不在进行登录操作了.
-        UserInfo userInfo = getByToken(token);
-        if(userInfo!=null){
-            rocketMQTemplate.sendOneWay(MQConstant.LOGIN_TOPIC,loginLog);
-        }else{
-            //根据用户手机号码查询用户对象
-            UserLogin userLogin = this.getUser(phone);
-            //进行密码加盐比对
-            if(userLogin==null || !userLogin.getPassword().equals(MD5Util.encode(password,userLogin.getSalt()))){
-                //进入这里说明登录失败
-                loginLog.setState(LoginLog.LOGIN_FAIL);
-                //往MQ中发送消息,登录失败
-                rocketMQTemplate.sendOneWay(MQConstant.LOGIN_TOPIC+":"+LoginLog.LOGIN_FAIL,loginLog);
-                //同事抛出异常，提示前台账号密码有误
-                throw new BusinessException(UAACodeMsg.LOGIN_ERROR);
-            }
-            //查询
-            userInfo = userMapper.selectUserInfoByPhone(phone);
-            userInfo.setLoginIp(ip);
-            token = createToken(userInfo);
-            rocketMQTemplate.sendOneWay(MQConstant.LOGIN_TOPIC,loginLog);
+        //根据用户手机号码查询用户对象
+        UserLogin userLogin = this.getUser(phone);
+        //进行密码加盐比对
+        if(userLogin==null || !userLogin.getPassword().equals(MD5Util.encode(password,userLogin.getSalt()))){
+            //进入这里说明登录失败
+            loginLog.setState(LoginLog.LOGIN_FAIL);
+            //往MQ中发送消息,登录失败
+            rocketMQTemplate.sendOneWay(MQConstant.LOGIN_TOPIC+":"+LoginLog.LOGIN_FAIL,loginLog);
+            //同事抛出异常，提示前台账号密码有误
+            throw new BusinessException(UAACodeMsg.LOGIN_ERROR);
         }
+        //查询
+        UserInfo userInfo = userMapper.selectUserInfoByPhone(phone);
+        userInfo.setLoginIp(ip);
+        String token = createToken(userInfo);
+        rocketMQTemplate.sendOneWay(MQConstant.LOGIN_TOPIC,loginLog);
         return new UserResponse(token,userInfo);
     }
     private String createToken(UserInfo userInfo) {

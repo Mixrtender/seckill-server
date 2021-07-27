@@ -14,5 +14,5 @@ public interface IUserService {
      * @param ip 客户端IP
      * @return
      */
-    UserResponse login(Long phone, String password, String ip, String token);
+    UserResponse login(Long phone, String password, String ip);
 }

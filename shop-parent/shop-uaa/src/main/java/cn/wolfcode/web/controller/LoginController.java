@@ -31,9 +31,8 @@ public class LoginController {
          * 在微服务中通过获取请求头从而获取到真实的客户端IP
          */
         String ip = request.getHeader(CommonConstants.REAL_IP);
-        String token = request.getHeader(CommonConstants.TOKEN_NAME);
         //进行登录，并将这个token返回给前台
-        UserResponse userResponse = userService.login(userLogin.getPhone(),userLogin.getPassword(),ip,token);
+        UserResponse userResponse = userService.login(userLogin.getPhone(),userLogin.getPassword(),ip);
         return Result.success(userResponse);
     }
 }
