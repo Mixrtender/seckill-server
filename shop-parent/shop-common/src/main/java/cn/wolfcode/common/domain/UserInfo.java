@@ -15,5 +15,4 @@ public class UserInfo implements Serializable {
     private String head;
     private String birthDay;
     private String info;
-    private String loginIp;
 }

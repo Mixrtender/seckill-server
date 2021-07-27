@@ -35,16 +35,19 @@ public class UserServiceImpl implements IUserService {
     private RocketMQTemplate rocketMQTemplate;
     private UserLogin getUser(Long phone){
         UserLogin userLogin;
-        String hashKey = UaaRedisKey.USER_HASH.getRealKey("");
+        String userLoginHashKey = UaaRedisKey.USERLOGIN_HASH.getRealKey("");
+        String userInfoHashKey = UaaRedisKey.USERINFO_HASH.getRealKey("");
         String zSetKey = UaaRedisKey.USER_ZSET.getRealKey("");
         String userKey = String.valueOf(phone);
-        String objStr = (String) redisTemplate.opsForHash().get(hashKey, String.valueOf(phone));
+        String objStr = (String) redisTemplate.opsForHash().get(userLoginHashKey, String.valueOf(phone));
         if(StringUtils.isEmpty(objStr)){
             //缓存中并没有，从数据库中查询
             userLogin = userMapper.selectUserLoginByPhone(phone);
             //把用户的登录信息存储到Hash结构中.
             if(userLogin!=null){
-                redisTemplate.opsForHash().put(hashKey,userKey,JSON.toJSONString(userLogin));
+                UserInfo userInfo = userMapper.selectUserInfoByPhone(phone);
+                redisTemplate.opsForHash().put(userInfoHashKey,userKey,JSON.toJSONString(userInfo));
+                redisTemplate.opsForHash().put(userLoginHashKey,userKey,JSON.toJSONString(userLogin));
             }
             //使用zSet结构,value存用户手机号码，分数为登录时间，在定时器中找出7天前登录的用户，然后再缓存中删除.
             //我们缓存中的只存储7天的用户登录信息(热点用户)
@@ -71,30 +74,26 @@ public class UserServiceImpl implements IUserService {
             throw new BusinessException(UAACodeMsg.LOGIN_ERROR);
         }
         //查询
-        UserInfo userInfo = userMapper.selectUserInfoByPhone(phone);
-        userInfo.setLoginIp(ip);
-        String token = createToken(userInfo);
+        //UserInfo userInfo = userMapper.selectUserInfoByPhone(phone);
+        UserInfo userInfo = this.getUserInfo(phone);
+        String token = createToken(String.valueOf(phone));
         rocketMQTemplate.sendOneWay(MQConstant.LOGIN_TOPIC,loginLog);
         return new UserResponse(token,userInfo);
     }
-    private String createToken(UserInfo userInfo) {
+
+    @Override
+    public UserInfo getUserInfo(Long phone) {
+        String userInfoHashKey = UaaRedisKey.USERINFO_HASH.getRealKey("");
+        String objStr = (String) redisTemplate.opsForHash().get(userInfoHashKey, String.valueOf(phone));
+        return JSON.parseObject(objStr,UserInfo.class);
+    }
+
+    private String createToken(String phone) {
         //token创建
         String token = UUID.randomUUID().toString().replace("-","");
         //把user对象存储到redis中
-        CommonRedisKey redisKey = CommonRedisKey.USER_TOKEN;
-        redisTemplate.opsForValue().set(redisKey.getRealKey(token), JSON.toJSONString(userInfo), redisKey.getExpireTime(),redisKey.getUnit());
+        CommonRedisKey user_token_key = CommonRedisKey.USER_TOKEN;
+        redisTemplate.opsForValue().set(user_token_key.getRealKey(token), phone, user_token_key.getExpireTime(),user_token_key.getUnit());
         return token;
-    }
-    /**
-     * 根据传入的token获取UserInfo对象
-     * @param token
-     * @return
-     */
-    private UserInfo getByToken(String token){
-        String strObj = redisTemplate.opsForValue().get(CommonRedisKey.USER_TOKEN.getRealKey(token));
-        if(StringUtils.isEmpty(strObj)){
-            return null;
-        }
-        return JSON.parseObject(strObj,UserInfo.class);
     }
 }

@@ -1,6 +1,7 @@
 package cn.wolfcode.service;
 
 
+import cn.wolfcode.common.domain.UserInfo;
 import cn.wolfcode.domain.UserResponse;
 
 /**
@@ -15,4 +16,11 @@ public interface IUserService {
      * @return
      */
     UserResponse login(Long phone, String password, String ip);
+
+    /**
+     * 根据手机获取UserInfo
+     * @param phone
+     * @return
+     */
+    UserInfo getUserInfo(Long phone);
 }

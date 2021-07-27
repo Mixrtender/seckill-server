@@ -40,14 +40,14 @@ public class UserCacheJob implements SimpleJob {
         //获取7天前的日期
         Long max = calendar.getTime().getTime();
         String userZSetKey = JobRedisKey.USER_ZSET.getRealKey("");
-        String userHashKey = JobRedisKey.USER_HASH.getRealKey("");
+        String userLoginHashKey = JobRedisKey.USERLOGIN_HASH.getRealKey("");
+        String userInfoHashKey = JobRedisKey.USERINFO_HASH.getRealKey("");
         Set<String> ids = redisTemplate.opsForZSet().rangeByScore(userZSetKey, 0, max);
         //删除7天前的用户缓存数据
         if(ids.size()>0){
-            redisTemplate.opsForHash().delete(userHashKey,ids.toArray());
+            redisTemplate.opsForHash().delete(userLoginHashKey,ids.toArray());
+            redisTemplate.opsForHash().delete(userInfoHashKey,ids.toArray());
         }
         redisTemplate.opsForZSet().removeRangeByScore(userZSetKey,0,calendar.getTime().getTime());
     }
-
-
 }

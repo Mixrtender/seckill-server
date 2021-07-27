@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 public enum JobRedisKey {
     SECKILL_PRODUCT_LIST("seckillProductList:"),
     SECKILL_STOCK_COUNT_HASH("seckillStockCount:"),
-    USER_HASH("userHash"),USER_ZSET("userZset");
+    USERLOGIN_HASH("userLoginHash"), USERINFO_HASH("userInfoHash"),USER_ZSET("userZset");
     JobRedisKey(String prefix, TimeUnit unit, int expireTime){
         this.prefix = prefix;
         this.unit = unit;

@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Getter
 public enum UaaRedisKey {
-    USER_HASH("userHash"),USER_ZSET("userZset");
+    USERLOGIN_HASH("userLoginHash"), USERINFO_HASH("userInfoHash"),USER_ZSET("userZset");
     UaaRedisKey(String prefix){
         this .prefix = prefix;
     }
