@@ -35,8 +35,8 @@ public class RequireLoginInterceptor implements HandlerInterceptor {
                     response.getWriter().write(JSON.toJSONString(Result.error(CommonCodeMsg.TOKEN_INVALID)));
                     return false;
                 }
-                UserInfo userInfo = JSON.parseObject(redisTemplate.opsForValue().get(CommonRedisKey.USER_TOKEN.getRealKey(token)),UserInfo.class);
-                if(userInfo==null){
+                String phone = JSON.parseObject(redisTemplate.opsForValue().get(CommonRedisKey.USER_TOKEN.getRealKey(token)),String.class);
+                if(phone==null){
                     response.getWriter().write(JSON.toJSONString(Result.error(CommonCodeMsg.TOKEN_INVALID)));
                     return false;
                 }
