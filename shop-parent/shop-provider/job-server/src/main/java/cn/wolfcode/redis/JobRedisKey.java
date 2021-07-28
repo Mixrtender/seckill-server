@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Getter
 public enum JobRedisKey {
-    SECKILL_PRODUCT_HASH("seckillProductHash"),
+    SECKILL_PRODUCT_HASH("seckillProductHash:"),
     SECKILL_STOCK_COUNT_HASH("seckillStockCount:"),
     USERLOGIN_HASH("userLoginHash"), USERINFO_HASH("userInfoHash"),USER_ZSET("userZset");
     JobRedisKey(String prefix, TimeUnit unit, int expireTime){
