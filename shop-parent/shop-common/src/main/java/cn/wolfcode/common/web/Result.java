@@ -24,6 +24,9 @@ public class Result<T> implements Serializable {
         this.msg = msg;
         this.data = data;
     }
+    public static <T> Result<T> success(){
+        return new Result(SUCCESS_CODE,SUCCESS_MESSAGE,null);
+    }
     public static <T> Result<T> success(T data){
         return new Result(SUCCESS_CODE,SUCCESS_MESSAGE,data);
     }
@@ -40,5 +43,4 @@ public class Result<T> implements Serializable {
         //状态吗！=200 说明有错误.
         return this.code!=SUCCESS_CODE;
     }
-
 }
