@@ -3,9 +3,9 @@
 <mapper namespace="cn.wolfcode.mapper.PayLogMapper" >
 
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
-    insert into t_pay_log (trade_no,notify_time,total_amount,pay_type)
+    insert into t_pay_log (order_no,pay_time,total_amount,pay_type)
             values
-            (#{tradeNo},#{notifyTime},#{totalAmount},#{payType})
+            (#{orderNo},#{payTime},#{totalAmount},#{payType})
   </insert>
 
 </mapper>
