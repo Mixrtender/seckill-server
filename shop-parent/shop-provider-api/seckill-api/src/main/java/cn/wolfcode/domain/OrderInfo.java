@@ -18,8 +18,8 @@ public class OrderInfo implements Serializable {
     public static final Integer STATUS_CANCEL = 2;//手动取消订单
     public static final Integer STATUS_TIMEOUT = 3;//超时取消订单
     public static final Integer STATUS_REFUND = 4;//已退款
-    public static final int PAYTYPE_ONLINE = 0;//在线支付
-    public static final int PAYTYPE_INTERGRAL = 1;//积分支付
+    public static final Integer PAYTYPE_ONLINE = 0;//在线支付
+    public static final Integer PAYTYPE_INTERGRAL = 1;//积分支付
     private String orderNo;//订单编号
     private Long userId;//用户ID
     private Long productId;//商品ID
