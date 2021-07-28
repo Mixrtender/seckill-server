@@ -3,9 +3,9 @@
 <mapper namespace="cn.wolfcode.mapper.RefundLogMapper" >
 
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
-    insert into t_refund_log (out_trade_no,refund_time,refund_reason,refund_amount,refund_type)
+    insert into t_refund_log (order_no,refund_time,refund_reason,refund_amount,refund_type)
             values
-            (#{outTradeNo},#{refundTime},#{refundReason},#{refundAmount},#{refundType})
+            (#{orderNo},#{refundTime},#{refundReason},#{refundAmount},#{refundType})
   </insert>
 
 </mapper>
