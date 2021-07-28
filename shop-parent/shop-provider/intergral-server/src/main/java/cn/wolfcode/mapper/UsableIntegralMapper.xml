@@ -24,10 +24,17 @@
     gmt_modified = now()
     where user_id = #{userId}
   </update>
-  <update id="addIntergral">
+  <update id="incrIntergral">
     update t_usable_integral
     set
     amount = amount + #{amount},
+    gmt_modified = now()
+    where user_id = #{userId}
+  </update>
+  <update id="decrIntergral">
+    update t_usable_integral
+    set
+    amount = amount - #{amount},
     gmt_modified = now()
     where user_id = #{userId}
   </update>

@@ -34,5 +34,11 @@ public interface UsableIntegralMapper {
      * @param userId
      * @param amount
      */
-    void addIntergral(@Param("userId") Long userId, @Param("amount") Long amount);
+    void incrIntergral(@Param("userId") Long userId, @Param("amount") Long amount);
+    /**
+     * 减少积分
+     * @param userId
+     * @param amount
+     */
+    void decrIntergral(@Param("userId") Long userId, @Param("amount") Long amount);
 }
