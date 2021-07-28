@@ -28,7 +28,12 @@ public class RequireLoginInterceptor implements HandlerInterceptor {
         if(handler instanceof HandlerMethod){
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             String feignRequest = request.getHeader(CommonConstants.FEIGN_REQUEST_KEY);
-            if(!StringUtils.isEmpty(feignRequest) && CommonConstants.FEIGN_REQUEST_FALSE.equals(feignRequest) && handlerMethod.getMethodAnnotation(RequireLogin.class)!=null){
+            //如果是feign请求，直接放行
+            if(!StringUtils.isEmpty(feignRequest) && CommonConstants.FEIGN_REQUEST_TRUE.equals(feignRequest)){
+                return true;
+            }
+            //如果不是Feign请求，判断是否有贴RequireLogin注解
+            if(handlerMethod.getMethodAnnotation(RequireLogin.class)!=null){
                 response.setContentType("application/json;charset=utf-8");
                 String token = request.getHeader(CommonConstants.TOKEN_NAME);
                 if(StringUtils.isEmpty(token)){
