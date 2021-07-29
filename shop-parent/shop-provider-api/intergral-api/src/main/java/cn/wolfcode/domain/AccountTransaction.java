@@ -16,7 +16,7 @@ public class AccountTransaction implements Serializable {
     public static final int STATE_COMMIT = 2;
     public static final int STATE_CANCEL = 3;
     private String txId;//全局事务ID
-    private String actionId;//分支事务ID
+    private Long actionId;//分支事务ID
     private Long userId;//用户ID
     private Date gmtCreated;//事务日志记录创建时间
     private Date gmtModified;//事务日志记录修改时间
