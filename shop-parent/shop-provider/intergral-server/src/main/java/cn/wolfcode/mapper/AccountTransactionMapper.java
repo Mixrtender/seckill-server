@@ -18,7 +18,7 @@ public interface AccountTransactionMapper {
      * @param actionId
      * @return
      */
-    AccountTransaction get(@Param("txId") String txId, @Param("actionId") String actionId);
+    AccountTransaction get(@Param("txId") String txId, @Param("actionId") Long actionId);
 
     /**
      * 更新事务日志状态
