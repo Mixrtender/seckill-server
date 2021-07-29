@@ -28,5 +28,5 @@ public interface AccountTransactionMapper {
      * @param checkState
      * @return
      */
-    int updateAccountTransactionState(@Param("txId") String txId, @Param("actionId") String actionId, @Param("changeState") int changeState, @Param("checkState") int checkState);
+    int updateAccountTransactionState(@Param("txId") String txId, @Param("actionId") Long actionId, @Param("changeState") int changeState, @Param("checkState") int checkState);
 }
