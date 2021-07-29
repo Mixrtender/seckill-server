@@ -21,6 +21,5 @@ public class AccountTransaction implements Serializable {
     private Date gmtCreated;//事务日志记录创建时间
     private Date gmtModified;//事务日志记录修改时间
     private Long amount;//此次积分变更数值
-    private String type;//此次积分变更类型 0减少积分 1增加积分
     private int state = STATE_TRY;//事务状态
 }
