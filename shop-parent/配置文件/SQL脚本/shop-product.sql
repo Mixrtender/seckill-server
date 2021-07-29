@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50636
-Source Host           : localhost:3306
+Source Server         : 192.168.113.204_3306
+Source Server Version : 50722
+Source Host           : 192.168.113.204:3306
 Source Database       : shop-product
 
 Target Server Type    : MYSQL
-Target Server Version : 50636
+Target Server Version : 50722
 File Encoding         : 65001
 
-Date: 2020-12-03 10:34:43
+Date: 2021-07-29 17:50:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -19,14 +19,14 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Table structure for t_product
 -- ----------------------------
 DROP TABLE IF EXISTS `t_product`;
-CREATE TABLE `t_product` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `product_name` varchar(200) DEFAULT NULL,
-  `product_title` varchar(200) DEFAULT NULL,
-  `product_img` varchar(200) DEFAULT NULL,
-  `product_detail` longtext,
-  `product_price` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE "t_product" (
+  "id" bigint(20) NOT NULL AUTO_INCREMENT,
+  "product_name" varchar(200) DEFAULT NULL,
+  "product_title" varchar(200) DEFAULT NULL,
+  "product_img" varchar(200) DEFAULT NULL,
+  "product_detail" longtext,
+  "product_price" decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY ("id")
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
